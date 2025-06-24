@@ -12,7 +12,7 @@ Design generative AI experiences that leverage the strengths of the Foundation M
    }
 }
 
-
+// TODO: add images
 ## Key Takeaways
 
 - 🤖 Best for simple tasks; no facts, math, and code generation
@@ -32,7 +32,7 @@ The on-device LLM has some limitations:
     - Don't rely on the model for facts and recent events
     - Can still be used in games and scenarios where the accuracy of the output is not too important
 - **Hallucinations**
-    - Use guided generation (see <doc:WWDC25-286-Meet-the-Foundation-Models-framework>) to improve response reliabilty
+    - Use guided generation (see <doc:WWDC25-286-Meet-the-Foundation-Models-framework>) to improve response reliability
 
 
 ## Prompting best practices
@@ -48,7 +48,7 @@ The on-device LLM has some limitations:
 - Use clear commands
 - Give a single specific task in detail
 - Provide up to 5 examples
-- Use all caps strong commands like MUST and DO NOT to control the behavior
+- Use all-caps strong commands like MUST and DO NOT to control the behavior
 
 ### Playgrounds demo
 > Tip: The new Playgrounds feature (see <doc:WWDC25-247-Whats-new-in-Xcode>) is a great place to test prompts directly in Xcode
@@ -69,7 +69,7 @@ While Apple's Foundation Models framework comes with integrated safety features,
 ### Built-in guardrails
 The framework automatically applies guardrails to:
 - **Input:** Instructions, prompts, and tool calls are screened for harmful content
-- **Output:** Model responses are filtered even if inputs bypass initial screening
+- **Output:** Model responses are filtered even if inputs bypass the initial screening
 
 You can catch and handle guardrail violation errors:
 ```swift
@@ -80,10 +80,10 @@ do {
 }
 ```
 
-> Note: Errors occuring in **proactive features**, not driven by user actions, are safe to ignore. However, any errors originating from **user-initiated features** should show suitable UI feedback to the user.
+> Note: Errors occurring in **proactive features**, not driven by user actions, are safe to ignore. However, any errors originating from **user-initiated features** should show suitable UI feedback to the user.
 
 ### Build trust and safety
-- Disallow inapropriate content
+- Disallow inappropriate content
 - Handle user input with care
 - Evaluate potential consequences of users acting on your app's output
 
@@ -130,7 +130,7 @@ The aforementioned safety recommendations act as multiple layers. Each layer has
 - Curate a dataset with prompts for all use cases and safety issues
 - Create automated tests with manual checks
 - Use another LLM to grade responses
-- Test failure scenarios with safety violations to see how you app behaves
+- Test failure scenarios with safety violations to see how your app behaves
 
 The model will be updated continuously. Make sure to report any safety issues you encounter.
 
