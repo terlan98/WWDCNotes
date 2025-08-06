@@ -102,7 +102,30 @@ In most cases, quantum-secure TLS provides sufficient protection against Harvest
     - Hardware-isolated execution via Secure Enclave
     - Formally verified
 
-While  post-quantum HPKE provides a simplified abstraction, CryptoKit gives developers the option to use **lower-level APIs** as well
+Sample Post-quantum HPKE usage:
+```swift
+let ciphersuite = HPKE.Ciphersuite.XWingMLKEM768X25519_SHA256_AES_GCM_256
+
+// Recipient
+let privateKey = try XWingMLKEM768X25519.PrivateKey.generate()
+let publicKey = privateKey.publicKey
+
+// Sender
+var sender = try HPKE.Sender(recipientKey: publicKey, ciphersuite: ciphersuite, info: info)
+let encapsulatedKey = sender.encapsulatedKey
+
+// Recipient
+var recipient = try HPKE.Recipient(privateKey: privateKey, ciphersuite: ciphersuite, info: info, encapsulatedKey: encapsulatedKey) 
+
+// Sender encrypts data
+let ciphertext = try sender.seal(userData, authenticating: metadata)
+
+// Recipient decrypts message
+let decryptedData = try recipient.open(ciphertext, authenticating: metadata)
+#expect(userData == decryptedData)
+```
+
+While  post-quantum HPKE provides a simplified abstraction, CryptoKit gives developers the option to use **lower-level APIs** as well.
 
 ### Quantum-secure signatures with CryptoKit
 Post-quantum hybrid signatures can be made using **ML-DSA**
